@@ -9,7 +9,7 @@ print("                                   welcome to tik tak toe                
 print("---------------------------------------------------------------------------------------------")
 
 
-def players(num):
+def players(num):  #Takes in the Player names and also checks if the player wants to play again
     if num:
         playerlist=[]
         player1=input("enter the name of player 1")
@@ -19,8 +19,8 @@ def players(num):
         playerchooser(playerlist)
     print("thanks for playing!")
 
-def playerchooser(playerlist):
-    i=random.randrange(0,2)
+def playerchooser(playerlist):           #This function chooses a player randomly so that both the players have equal advantage
+    i=random.randrange(0,2)     
     first=playerlist[i]
     print("{} will go first!".format(first))
     a=1
@@ -29,7 +29,7 @@ def playerchooser(playerlist):
     second=playerlist[a]
     play(first,second)
 
-def play(first,second):
+def play(first,second):                               #creates a sample gameboard so that the player knows where to put the marker
     gameboard=[x for x in range(1,10)]
     char1=input("{} enter your character".format(first)).upper()
     char2=input("{} enter your character".format(second)).upper()
@@ -37,7 +37,7 @@ def play(first,second):
     printer(gameboard)
     maingame(char1,char2,gameboard,first,second,x)
 
-def maingame(c1,c2,gameboard,first,second,x):
+def maingame(c1,c2,gameboard,first,second,x):              #the function where the game runs and it is the main function
     while x<9:
         if x%2==0:
             placer=int(input(" {} where you want to put the character".format(first)))
@@ -63,19 +63,19 @@ def maingame(c1,c2,gameboard,first,second,x):
         print("the match was a draw....Want to play again? ")
         players(int(input("press 1 for yes and 0 for no")))
 
-def printer(gameboard):
+def printer(gameboard):         #Prints the game board
     print(gameboard[0],"|",gameboard[1],"|",gameboard[2])
     print(gameboard[3],"|",gameboard[4],"|",gameboard[5])
     print(gameboard[6],"|",gameboard[7],"|",gameboard[8])
     
-def verifier(placer,c1,c2,gameboard,x,first,second):
+def verifier(placer,c1,c2,gameboard,x,first,second):           #This function checks if the player is playing a valid miove
     if gameboard[placer-1]!=c1 and gameboard[placer-1]!=c2:
         return True
     else:
         print("The move is invalid enter the new number where you want to place the character")
         maingame(c1,c2,gameboard,first,second,x)
     
-def checker(gameboard,character):
+def checker(gameboard,character):                 #function which checks whether any player has won
     if gameboard[0]==gameboard[1]==gameboard[2]==character:
         return True
     if gameboard[3]==gameboard[4]==gameboard[5]==character:
