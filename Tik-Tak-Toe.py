@@ -2,14 +2,14 @@
 #to see the functions and their work check the image in the folder
 
 import random
-
+import os
 
 print("---------------------------------------------------------------------------------------------")
 print("                                   welcome to tik tak toe                                    ")
 print("---------------------------------------------------------------------------------------------")
 
 
-def players(num):  #Takes in the Player names and also checks if the player wants to play again
+def players(num=1):  #Takes in the Player names and also checks if the player wants to play again
     if num:
         playerlist=[]
         player1=input("enter the name of player 1")
@@ -43,25 +43,31 @@ def maingame(c1,c2,gameboard,first,second,x):              #the function where t
             placer=int(input(" {} where you want to put the character".format(first)))
         else:
             placer=int(input(" {} where you want to put the character".format(second)))
+        
         if x%2==0 and verifier(placer,c1,c2,gameboard,x,first,second):
             gameboard.pop(placer-1)
             gameboard.insert(placer-1,c1)
+            os.system("cls")
             printer(gameboard)
             if checker(gameboard,c1):
                 print("{} has won!".format(first))
                 players(int(input("want to play again? press 1 for yes and 0 for no")))
+                break
         
         if x%2!=0 and verifier(placer,c1,c2,gameboard,x,first,second):
             gameboard.pop(placer-1)
             gameboard.insert(placer-1,c2)
+            os.system("cls")
             printer(gameboard)
             if checker(gameboard,c2):
                 print("{} has won!".format(second))
                 players(int(input("want to play again? press 1 for yes and 0 for no")))
+                break
         x+=1
     if x==9:
         print("the match was a draw....Want to play again? ")
         players(int(input("press 1 for yes and 0 for no")))
+
 
 def printer(gameboard):         #Prints the game board
     print(gameboard[0],"|",gameboard[1],"|",gameboard[2])
@@ -94,7 +100,7 @@ def checker(gameboard,character):                 #function which checks whether
         return True
     else:   return False
 
-players(1)
+players()
           
 
 
